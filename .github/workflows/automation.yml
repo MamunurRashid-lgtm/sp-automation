@@ -59,7 +59,7 @@ jobs:
       - name: Move Allure Report to 'public' directory
         run: |
           mkdir -p public
-          cp -r build/allure-report/* public/
+          cp -r allure-report/* public/
 
       # Step 12: Deploy Allure Report to GitHub Pages
       - name: Deploy Allure Report to GitHub Pages
