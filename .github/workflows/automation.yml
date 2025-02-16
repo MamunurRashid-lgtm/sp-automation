@@ -55,7 +55,7 @@ jobs:
         run: |
           allure generate build\allure-results --clean -o build\allure-report
 
-      # Step 11: Move Allure Report to 'public' directory
+      # Step 11: Move Allure Report to 'public'
       - name: Move Allure Report to 'public' directory
         run: |
           mkdir -p public
