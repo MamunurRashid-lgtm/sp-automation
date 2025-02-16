@@ -54,15 +54,11 @@ jobs:
       run: |
         allure generate build\allure-results --clean -o build\allure-report
 
-    # Step 8: Upload Allure Report to GitHub Pages (Optional)
+    # Deploy Allure Report to GitHub Pages
     - name: Deploy Allure Report to GitHub Pages
-      run: |
-          git config --global user.name "MamunurRashid-lgtm"
-          git config --global user.email "mamunur.rashid@byslglobal.com"
-          git init  # Initialize git repository
-          git checkout --orphan gh-pages
-          git reset --hard
-          git add -A  # Add all files
-          git commit -m "Deploy Allure report"
-          git branch -M gh-pages  # Rename current branch to gh-pages
-          git push --force origin gh-pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+          github_token: ${{ secrets.TOKEN }}
+          publish_dir: build/allure-report
+          publish_branch: gh-pages
+          keep_files: true
