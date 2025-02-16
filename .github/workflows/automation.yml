@@ -44,10 +44,10 @@ jobs:
     - name: Run Tests
       run: gradle clean test
 
-    # Step 6: Install Allure Commandline for reporting
-    - name: Install Allure CLI
+    # Step 6: Install Allure CLI using npm
+    - name: Install Allure CLI via npm
       run: |
-        choco install allure
+        npm install -g allure-commandline --save-dev
 
     # Step 7: Generate Allure Report
     - name: Generate Allure Report
