@@ -67,7 +67,7 @@ jobs:
         run: |
             timestamp=$(date +%Y%m%d%H%M%S)
             mkdir -p build/reports/$timestamp
-            mv build/allure-report/* build/reports/$timestamp/
+            mv allure-report/* build/reports/$timestamp/
             echo "REPORT_LINK=https://mamunurrashid-lgtm.github.io/sp-automation/reports/$timestamp/index.html" >> $GITHUB_ENV
 
       # Display directory structure for debugging
