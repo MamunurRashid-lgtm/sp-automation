@@ -59,8 +59,10 @@ jobs:
       run: |
           git config --global user.name "MamunurRashid-lgtm"
           git config --global user.email "mamunur.rashid@byslglobal.com"
+          git init  # Initialize git repository
           git checkout --orphan gh-pages
           git reset --hard
-          git add -A
+          git add -A  # Add all files
           git commit -m "Deploy Allure report"
+          git branch -M gh-pages  # Rename current branch to gh-pages
           git push --force origin gh-pages
