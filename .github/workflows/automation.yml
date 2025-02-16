@@ -10,71 +10,72 @@ jobs:
     runs-on: windows-latest  # Use the latest Windows environment
     
     steps:
-    
-    # Step 1: Checkout the repository
-    - name: Checkout Code
-      uses: actions/checkout@v3
-    # Step 2: Set up JDK (e.g., OpenJDK 17)
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        java-package: jdk
-        distribution: 'temurin'
-        check-latest: false
-        server-id: github
-        server-username: ${{ github.USERNAME }}
-        server-password: ${{ secrets.TOKEN }}
-        overwrite-settings: true
-        job-status: success
-    # Step 3: Cache Gradle dependencies for faster builds
-    - name: Cache Gradle dependencies
-      uses: actions/cache@v3
-      with:
-        path: C:\Users\runneradmin\.gradle\caches
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-
 
-    # Step 4: Build the project using Gradle
-    - name: Build with Gradle
-      run: .\build.gradle
+      # Step 1: Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-    # Step 5: Run Selenium Tests (assuming you have a `test` task in your Gradle build)
-    - name: Run Tests
-      run: gradle clean test
+      # Step 2: Set up JDK (e.g., OpenJDK 17)
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          java-package: jdk
+          distribution: 'temurin'
 
-    # Step 6: Install Allure CLI using npm
-    - name: Install Allure CLI via npm
-      run: |
-        npm install -g allure-commandline --save-dev
+      # Step 3: Cache Gradle dependencies for faster builds
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v3
+        with:
+          path: C:\Users\runneradmin\.gradle\caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
-    # Step 7: Generate Allure Report
-    - name: Generate Allure Report
-      run: |
-        allure generate build\allure-results --clean -o build\allure-report
+      # Step 4: Build the project using Gradle
+      - name: Build with Gradle
+        run: .\gradlew build
 
-      # Step 8: List Allure Results (for debugging)
-    - name: List Allure Results
-      run: |
-        dir build\allure-results
+      # Step 5: Run Selenium Tests
+      - name: Run Tests
+        run: gradle clean test
 
-      # Step 9: List generated files in allure-report (for debugging)
-    - name: List generated files in allure-report
-      run: |
-        dir build\allure-report
+      # Step 6: Install Allure CLI using npm
+      - name: Install Allure CLI via npm
+        run: |
+          npm install -g allure-commandline --save-dev
 
-      # Step 10: Move Allure Report to 'public' directory
-    - name: Move Allure Report to 'public' directory
-      run: |
-        mkdir -p public
-        cp -r build/allure-report/* public/
+      # Step 7: List the contents of the 'build' directory for debugging
+      - name: List build directory contents (for debugging)
+        run: |
+          dir build
 
-    # Deploy Allure Report to GitHub
-    - name: Deploy Allure Report to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
+      # Step 8: List Allure Results folder (for debugging)
+      - name: List Allure Results folder (for debugging)
+        run: |
+          dir build\allure-results
+
+      # Step 9: Generate Allure Report
+      - name: Generate Allure Report
+        run: |
+          allure generate build\allure-results --clean -o build\allure-report
+
+      # Step 10: List generated files in allure-report (for debugging)
+      - name: List generated files in allure-report
+        run: |
+          dir build\allure-report
+
+      # Step 11: Move Allure Report to 'public' directory
+      - name: Move Allure Report to 'public' directory
+        run: |
+          mkdir -p public
+          cp -r build/allure-report/* public/
+
+      # Step 12: Deploy Allure Report to GitHub Pages
+      - name: Deploy Allure Report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
           github_token: ${{ secrets.TOKEN }}
-          publish_dir: build/allure-report
+          publish_dir: public
           publish_branch: gh-pages
           keep_files: true
