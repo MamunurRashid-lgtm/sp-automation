@@ -61,20 +61,19 @@ jobs:
           mkdir -p public
           cp -r allure-report/* public/
 
-      # Move Allure Report to Unique Folder
+      # Step 8: Move Allure Report to Unique Folder
       - name: Move Allure Report to Unique Folder
         shell: bash
         run: |
-            timestamp=$(date +%Y%m%d%H%M%S)
-            mkdir -p build/reports/$timestamp
-            mv allure-report/* build/reports/$timestamp/
-            echo "REPORT_LINK=https://mamunurrashid-lgtm.github.io/sp-automation/reports/$timestamp/index.html" >> $GITHUB_ENV
+          timestamp=$(date +%Y%m%d%H%M%S)
+          mkdir -p build/reports/$timestamp
+          mv allure-report/* build/reports/$timestamp/
+          echo "REPORT_LINK=https://mamunurrashid-lgtm.github.io/sp-automation/reports/$timestamp/index.html" >> $GITHUB_ENV
 
-      # Display directory structure for debugging
+      # Step 9: Display directory structure for debugging
       - name: List directory structure for verification
         shell: bash
-        run: |
-          ls -R public
+        run: ls -R build/reports
 
         # Step 12: Deploy Allure Report to GitHub Pages
       - name: Deploy Allure Report to GitHub Pages
