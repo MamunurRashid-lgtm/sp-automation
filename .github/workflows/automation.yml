@@ -80,7 +80,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.TOKEN }}
-          publish_dir: public
+          publish_dir: build/reports
           publish_branch: gh-pages
           keep_files: true
 
