@@ -60,11 +60,6 @@ jobs:
         run: |
           allure generate build\allure-results --clean -o build\allure-report
 
-      # Step 10: List generated files in allure-report (for debugging)
-      - name: List generated files in allure-report
-        run: |
-          dir build\allure-report
-
       # Step 11: Move Allure Report to 'public' directory
       - name: Move Allure Report to 'public' directory
         run: |
