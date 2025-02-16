@@ -32,11 +32,11 @@ jobs:
 
     # Step 4: Build the project using Gradle
     - name: Build with Gradle
-      run: .\gradlew build --no-daemon
+      run: .\build.gradle
 
     # Step 5: Run Selenium Tests (assuming you have a `test` task in your Gradle build)
     - name: Run Tests
-      run: .\gradlew test --no-daemon
+      run: gradle clean test
 
     # Step 6: Install Allure Commandline for reporting
     - name: Install Allure CLI
