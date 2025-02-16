@@ -34,7 +34,7 @@ jobs:
 
       # Step 4: Build the project using Gradle
       - name: Build with Gradle
-        run: .\gradlew build
+        run: .\gradlew.bat build
 
       # Step 5: Run Selenium Tests
       - name: Run Tests
