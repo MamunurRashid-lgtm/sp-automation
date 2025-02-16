@@ -54,7 +54,6 @@ jobs:
       - name: Generate Allure Report
         run: |
           allure generate allure-results --clean -o allure-report
-          allure serve allure-results
 
       # Step 11: Move Allure Report to 'public'
       - name: Move Allure Report to 'public' directory
