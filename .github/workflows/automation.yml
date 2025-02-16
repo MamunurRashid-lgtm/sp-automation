@@ -85,7 +85,7 @@ jobs:
           publish_branch: gh-pages
           keep_files: true
 
-      # Send email with GitHub Pages link including
+      # Send email with GitHub Pages
       - name: Send email with Allure Report Link
         uses: dawidd6/action-send-mail@v3
         with:
