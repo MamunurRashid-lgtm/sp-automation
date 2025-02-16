@@ -50,11 +50,6 @@ jobs:
         run: |
           dir build
 
-      # Step 8: List Allure Results folder (for debugging)
-      - name: List Allure Results folder (for debugging)
-        run: |
-          dir build\allure-results
-
       # Step 9: Generate Allure Report
       - name: Generate Allure Report
         run: |
