@@ -23,6 +23,5 @@ public class LoginTestRunner extends Setup {
         String username = (String) userObj.get("userName");
         String password = (String) userObj.get("password");
         login.doLogin(username, password);
-
     }
 }
