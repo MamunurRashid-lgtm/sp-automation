@@ -54,6 +54,22 @@ jobs:
       run: |
         allure generate build\allure-results --clean -o build\allure-report
 
+      # Step 8: List Allure Results (for debugging)
+    - name: List Allure Results
+      run: |
+        dir build\allure-results
+
+      # Step 9: List generated files in allure-report (for debugging)
+    - name: List generated files in allure-report
+      run: |
+        dir build\allure-report
+
+      # Step 10: Move Allure Report to 'public' directory
+    - name: Move Allure Report to 'public' directory
+      run: |
+        mkdir -p public
+        cp -r build/allure-report/* public/
+
     # Deploy Allure Report to GitHub
     - name: Deploy Allure Report to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
