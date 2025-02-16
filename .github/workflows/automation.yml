@@ -1,0 +1,56 @@
+name: CI/CD Pipeline for Selenium Project
+
+on:
+  push:
+    branches:
+      - main  # Trigger the pipeline on push to the 'main' branch
+
+jobs:
+  build:
+    runs-on: windows-latest  # Use the latest Windows environment
+    
+    steps:
+    
+    # Step 1: Checkout the repository
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    # Step 2: Set up JDK (e.g., OpenJDK 11)
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'  # Specify the JDK version you want to use
+
+    # Step 3: Cache Gradle dependencies for faster builds
+    - name: Cache Gradle dependencies
+      uses: actions/cache@v2
+      with:
+        path: C:\Users\runneradmin\.gradle\caches
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+
+    # Step 4: Build the project using Gradle
+    - name: Build with Gradle
+      run: .\gradlew build --no-daemon
+
+    # Step 5: Run Selenium Tests (assuming you have a `test` task in your Gradle build)
+    - name: Run Tests
+      run: .\gradlew test --no-daemon
+
+    # Step 6: Install Allure Commandline for reporting
+    - name: Install Allure CLI
+      run: |
+        choco install allure
+
+    # Step 7: Generate Allure Report
+    - name: Generate Allure Report
+      run: |
+        allure generate build\allure-results --clean -o build\allure-report
+
+    # Step 8: Upload Allure Report to GitHub Pages (Optional)
+    - name: Upload Allure Report to GitHub Pages
+      uses: jamesives/github-pages-deploy-action@v4
+      with:
+        branch: gh-pages  # The branch where the report will be deployed
+        folder: build\allure-report  # Path to the generated Allure report
