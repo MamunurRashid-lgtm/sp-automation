@@ -1,0 +1,2 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","10625","User can login with valid credential","Smart People HRM Test Suite","Mon Feb 17 18:26:22 BDT 2025","passed","Mon Feb 17 18:26:33 BDT 2025","testrunner.LoginTestRunner","Login Test","testrunner.LoginTestRunner","doLogin"
