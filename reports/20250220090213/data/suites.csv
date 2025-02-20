@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","5153","Verify Employee List","Default Suite","Thu Feb 20 08:45:23 UTC 2025","passed","Thu Feb 20 08:45:28 UTC 2025","testrunner.OfficialLetterTestRunner","sp-automation","testrunner.OfficialLetterTestRunner","getEmployeeTotal"
+"","10544","User can login with valid credential","Default Suite","Wed Feb 19 04:17:26 UTC 2025","passed","Wed Feb 19 04:17:37 UTC 2025","testrunner.LoginTestRunner","sp-automation","testrunner.LoginTestRunner","doLogin"
+"","5273","Verify Employee List","Smart People HRM Test Suite","Thu Feb 20 09:01:55 UTC 2025","passed","Thu Feb 20 09:02:00 UTC 2025","testrunner.LoginTestRunner","Login Test","testrunner.LoginTestRunner","getEmployeeTotal"
+"","795","Verify Dashboard appears after login","Smart People HRM Test Suite","Thu Feb 20 09:01:54 UTC 2025","passed","Thu Feb 20 09:01:55 UTC 2025","testrunner.LoginTestRunner","Login Test","testrunner.LoginTestRunner","verifyDashboard"
