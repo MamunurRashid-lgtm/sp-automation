@@ -90,7 +90,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           from: ${{ secrets.USERNAME }}
           to: mamunur.rashid@byslglobal.com
-          subject: "Submission of Automated API Testing Report for Your Review"  # Same subject to keep in same thread
+          subject: "Submission of Automated API Testing Report for Your Review"
           body: |
               
                 Dear Sir,
