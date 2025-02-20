@@ -40,7 +40,7 @@ jobs:
       - name: Run Tests
         run: gradle clean test --daemon
 
-      # Step 6: Install Allure CLI using npm
+      # Step 6: Install Allure CLI using npm-1
       - name: Install Allure CLI via npm
         run: |
           npm install -g allure-commandline --save-dev
