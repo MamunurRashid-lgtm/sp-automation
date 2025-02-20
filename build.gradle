@@ -24,7 +24,7 @@ dependencies {
 test {
     test {
         useTestNG() {
-            suites "./src/test/resources/suites/LoginTestSuite.xml"
+            suites "./src/test/resources/suites/MasterSuite.xml"
         }
 
         testLogging {

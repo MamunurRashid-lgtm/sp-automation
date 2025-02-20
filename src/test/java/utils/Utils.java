@@ -3,12 +3,18 @@ package utils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
+import java.time.Duration;
 import java.util.List;
 import java.util.Properties;
 
@@ -60,5 +66,10 @@ public class Utils {
 
     public static String getBaseUrl() {
         return properties.getProperty("base_url");
+    }
+
+    public static WebElement waitForElement(WebDriver driver, By locator, int timeoutInSeconds) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 }

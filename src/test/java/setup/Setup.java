@@ -1,31 +1,41 @@
 package setup;
 
+import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
+import pages.Login;
+import utils.Utils;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.time.Duration;
+import java.util.List;
 
 public class Setup {
 
     public WebDriver driver;
+    public Login login;
 
-    @BeforeTest
-    public void setup() {
+    @BeforeSuite
+    public void setUp() throws IOException, ParseException, org.json.simple.parser.ParseException, InterruptedException {
+        driver = DriverManager.getDriver();
+        driver.get(Utils.getBaseUrl());
 
-            driver = new ChromeDriver();
-            driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-        }
+        // Read user credentials from JSON
+        List<?> data = Utils.readJSONArray("./src/test/resources/Users.json");
+        JSONObject userObj = (JSONObject) data.get(data.size() - 3);
+        String username = (String) userObj.get("userName");
+        String password = (String) userObj.get("password");
 
-    @AfterTest
-    public void quitBrowser() {
-        try {
-            driver.close();
-        } catch (Exception e) {
-            driver.quit();
-        }
+        // Perform Login once for all tests
+        login = new Login(driver);
+        login.doLogin(username, password);
+    }
+
+    @AfterSuite
+    public void tearDown() {
+        DriverManager.quitDriver();
     }
 }

@@ -1,8 +1,13 @@
 package testrunner;
 
 import org.json.simple.JSONObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.Login;
+import pages.OfficialLetter;
 import setup.Setup;
 import utils.Utils;
 
@@ -14,14 +19,16 @@ public class LoginTestRunner extends Setup {
 
     Login login;
 
-    @Test(priority = 0, description = "User can login with valid credential")
-    public void doLogin() throws IOException, ParseException, IOException, ParseException, org.json.simple.parser.ParseException, InterruptedException, ParseException {
-        driver.get(Utils.getBaseUrl());
-        List<?> data = Utils.readJSONArray("./src/test/resources/Users.json");
+    @Test(priority = 0, description = "Verify Dashboard appears after login")
+    public void verifyDashboard() {
+        By dashboard = By.xpath("//h5[normalize-space()='Dashboard']");
+        WebElement clickDashboard = Utils.waitForElement(driver, dashboard, 10);
+        Assert.assertTrue(clickDashboard.isDisplayed(), "Dashboard is visible.");
+    }
+    @Test(priority = 1, description = "Verify Employee List")
+    public void getEmployeeTotal() throws InterruptedException {
         login = new Login(driver);
-        JSONObject userObj = (JSONObject) data.get(data.size()-3);
-        String username = (String) userObj.get("userName");
-        String password = (String) userObj.get("password");
-        login.doLogin(username, password);
+        login.getTotalEmployeeList();
+
     }
 }
