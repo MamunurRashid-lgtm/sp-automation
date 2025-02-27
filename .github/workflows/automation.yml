@@ -79,7 +79,7 @@ jobs:
           publish_branch: gh-pages
           keep_files: true
 
-      # Step 12: Send Email with Allure Report
+      # Step 12: Send Email with Allure Report Link
       - name: Send email with Allure Report Link
         uses: dawidd6/action-send-mail@v3
         with:
